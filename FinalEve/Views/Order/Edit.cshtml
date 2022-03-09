@@ -1,0 +1,58 @@
+﻿@using FinalEve.ViewModel
+
+@model  OrderViewModel
+
+@Html.ValidationSummary(true)
+
+@using (Ajax.BeginForm("Edit", null, new AjaxOptions
+{
+    UpdateTargetId = "",
+    OnSuccess = "success",
+    OnFailure = "failure",
+    HttpMethod = "Post"
+}, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(o => o.OrderaddKey.OrderId)
+    <br />
+    @Html.LabelFor(o => o.OrderaddKey.Item)
+    @Html.TextBox("OrderaddKey.Item", Model.OrderaddKey.Item)
+    @Html.ValidationMessageFor(o => o.OrderaddKey.Item)
+    <br />
+    @Html.LabelFor(o => o.OrderaddKey.Total)
+    @Html.TextBox("OrderaddKey.Total", Model.OrderaddKey.Total)
+    @Html.ValidationMessageFor(o => o.OrderaddKey.Total)
+    <br />
+    @Html.LabelFor(o => o.OrderaddKey.OrderDate)
+    <input type="date" id="date_id" name="OrderaddKey.OrderDate" value="@string.Format("{0:yyyy-MM-dd}" ,Model.OrderaddKey.OrderDate)" />
+    @Html.ValidationMessageFor(o => o.OrderaddKey.OrderDate)
+    <br />
+    @Html.LabelFor(o => o.OrderaddKey.IsAvailable)
+    @Html.CheckBoxFor(o => o.OrderaddKey.IsAvailable)
+    @Html.ValidationMessageFor(o => o.OrderaddKey.IsAvailable)
+    <br />
+    <span> Picture: </span>
+    <input type="file" name="OrderaddKey.PictureUrl" />
+    <br />
+    @Html.DropDownList("OrderaddKey.CustomerId", (IEnumerable<SelectListItem>)ViewBag.CustomerList)
+    <br />
+
+    <input type="submit" value="Update" />
+
+}
+<script>
+
+    function success(data) {
+
+        alert('Success');
+
+    }
+
+    function failure(data) {
+
+        alert('Failure');
+
+    }
+
+</script>
+
+

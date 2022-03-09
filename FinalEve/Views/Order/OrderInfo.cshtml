@@ -1,0 +1,65 @@
+﻿@using FinalEve.ViewModel
+@model OrderViewModel
+
+<table class="table">
+
+    <tr>
+        <th>CustomerName</th>
+
+        <th>OrderId</th>
+        <th>OiderItem</th>
+        <th>TotalQnty</th>
+        <th>OrderDate</th>
+        <th>Isavailable</th>
+        <th>Picture</th>
+    </tr>
+    @{
+        if (Model.Orders != null)
+        {
+            foreach (var tempUserInfo in Model.Orders)
+            {
+
+                <tr>
+                    <td>@tempUserInfo.Customer.CustomerName</td>
+                    <td>@tempUserInfo.OrderId</td>
+                    <td>@tempUserInfo.Item</td>
+                    <td>@tempUserInfo.Total</td>
+                    <td>@tempUserInfo.OrderDate</td>
+                    <td><input type="checkbox" value="@tempUserInfo.IsAvailable" checked="checked" /> </td>
+
+                    <td> <img src="@tempUserInfo.Picture" width="100" height="100" /> </td>
+
+                    <td> @Html.ActionLink("Delete", "Delete", new { OrderId = tempUserInfo.OrderId })</td>
+                    <td> @Html.ActionLink("Edit", "Edit", new { OrderId = tempUserInfo.OrderId })</td>
+                </tr>
+            }
+        }
+    }
+
+</table>
+<br />
+<br />
+<div>
+    @Html.ActionLink("Insert", "Insert", new { })
+</div>
+@{
+    if (HttpContext.Current.Session["ActionToken"] != null)
+    {
+        if ((ActionMode)HttpContext.Current.Session["ActionToken"] == ActionMode.Insert)
+        {
+            Html.RenderPartial("Insert", Model);
+            HttpContext.Current.Session["ActionToken"] = null;
+        }
+        else if ((ActionMode)HttpContext.Current.Session["ActionToken"] == ActionMode.Edit)
+        {
+            Html.RenderPartial("Edit", Model);
+            HttpContext.Current.Session["ActionToken"] = null;
+            HttpContext.Current.Session["OrderId"] = null;
+
+        }
+    }
+
+}
+
+
+

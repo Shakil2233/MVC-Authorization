@@ -1,0 +1,38 @@
+﻿@using FinalEve.Models
+
+@model IList< Customer>
+
+
+
+<div>
+    @Html.ActionLink("Create New", "Insert")
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>CustomerId</th>
+            <th>CustomerName</th>
+            <th>Phone</th>
+        </tr>
+        @foreach (var Indata in Model)
+        {
+    <tr>
+        <td>
+            @Indata.CustomerId
+        </td>
+        <td>
+            @Indata.CustomerName
+        </td>
+        <td>
+            @Indata.Phone
+        </td>
+        <td> @Html.ActionLink("Edit", "Edit", new { id = Indata.CustomerId })  </td>
+        <td> @Html.ActionLink("Delete", "Delelte", new { id = Indata.CustomerId })  </td>
+
+    </tr>
+
+
+
+        }
+    </thead>
+</table>

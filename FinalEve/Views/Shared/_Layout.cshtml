@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title -MVC_CRUD </title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+</head>
+<body>
+    <table class="table">
+        <tr>
+            <td>@Html.ActionLink("Order", "OrderInfo", "Order")</td>
+            <td>@Html.ActionLink("Customers", "CustomerInfo", "Customer")</td>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <td> <a>Hello- @User.Identity.Name</a></td>
+                <td>@Html.ActionLink("Logout", "Logout", "Access")</td>
+            }
+            else
+            {
+                <td>@Html.ActionLink("Login", "Login", "Access")</td>
+            }
+
+
+        </tr>
+    </table>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My Final Exam</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>
